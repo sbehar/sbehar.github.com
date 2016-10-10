@@ -4,8 +4,27 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 <style>
-	div{width:200px;height:200px;background:red;}
+	div{width:200px;height:200px;background:red;position:absolute;left:0;top:0;}
 </style>
+<script>
+	window.onload = function(){
+		var oBox = document.querySelector('div');
+		
+		oBox.onmousedown = function(ev){
+			var disX = ev.clientX - oBox.offsetLeft;
+			var disY = ev.clientY - oBox.offsetTop;
+			document.onmousemove = function(ev){
+				oBox.style.left = ev.clientX - disX + "px";
+				oBox.style.top = ev.clientY - disY + "px";
+			}
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				document.onmouseup = null;
+			}
+			return false;
+		}
+	}
+</script>
 </head>
 
 <body>
